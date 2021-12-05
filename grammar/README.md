@@ -1778,6 +1778,7 @@ Go to: _[function-declaration](#user-content-function-declaration)_;
 
 A circuit declaration defines a circuit type,
 as consisting of member constants, variables and functions.
+A circuit declaration may be preceded with a number of annotations.
 A circuit member constant declaration
 as consisting of member constants, member variables, and member functions.
 To more simply accommodate the backward compatibility
@@ -1788,7 +1789,7 @@ allowing member variables and member functions to be intermixed.
 
 <a name="circuit-declaration"></a>
 ```abnf
-circuit-declaration = %s"circuit" identifier
+circuit-declaration = *annotation %s"circuit" identifier
                       "{" *member-constant-declaration
                       [ member-variable-declarations ]
                       *member-function-declaration "}"
