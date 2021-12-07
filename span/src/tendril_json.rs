@@ -14,33 +14,17 @@
 // You should have received a copy of the GNU General Public License
 // along with the Leo library. If not, see <https://www.gnu.org/licenses/>.
 
-use crate::{Expression, Identifier, Node};
-use leo_span::Span;
+//! Provides logic for serializing and deserializing the `StrTendril` type.
 
-use std::fmt;
+use serde::{Deserialize, Deserializer, Serializer};
+use tendril::StrTendril;
 
-use serde::{Deserialize, Serialize};
-
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-pub struct MemberAccess {
-    pub inner: Box<Expression>,
-    pub name: Identifier,
-    pub span: Span,
-    pub type_: Option<crate::Type>,
+/// Serialization for the StrTendril type.
+pub fn serialize<S: Serializer>(tendril: &StrTendril, serializer: S) -> Result<S::Ok, S::Error> {
+    serializer.serialize_str(&tendril[..])
 }
 
-impl fmt::Display for MemberAccess {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "{}.{}", self.inner, self.name)
-    }
-}
-
-impl Node for MemberAccess {
-    fn span(&self) -> &Span {
-        &self.span
-    }
-
-    fn set_span(&mut self, span: Span) {
-        self.span = span;
-    }
+/// Deserialization for the StrTendril type.
+pub fn deserialize<'de, D: Deserializer<'de>>(deserializer: D) -> Result<StrTendril, D::Error> {
+    Ok(String::deserialize(deserializer)?.into())
 }

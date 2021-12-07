@@ -18,7 +18,8 @@ use crate::{
     CharValue, ConstInt, ConstValue, Expression, ExpressionNode, FromAst, GroupValue, Node, PartialType, Scope, Type,
 };
 
-use leo_errors::{AsgError, Result, Span};
+use leo_errors::{AsgError, Result};
+use leo_span::Span;
 use std::convert::TryInto;
 
 use std::cell::Cell;

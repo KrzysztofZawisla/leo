@@ -15,7 +15,8 @@
 // along with the Leo library. If not, see <https://www.gnu.org/licenses/>.
 
 use crate::{accesses::*, ConstValue, Expression, ExpressionNode, FromAst, Node, PartialType, Scope, Type};
-use leo_errors::{Result, Span};
+use leo_errors::Result;
+use leo_span::Span;
 
 #[derive(Clone)]
 pub enum AccessExpression<'a> {

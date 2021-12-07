@@ -60,7 +60,8 @@ mod err;
 pub use err::*;
 
 use crate::{ConstValue, FromAst, Node, PartialType, Scope, Type};
-use leo_errors::{Result, Span};
+use leo_errors::Result;
+use leo_span::Span;
 
 #[derive(Clone)]
 pub enum Expression<'a> {

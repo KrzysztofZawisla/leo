@@ -14,15 +14,13 @@
 // You should have received a copy of the GNU General Public License
 // along with the Leo library. If not, see <https://www.gnu.org/licenses/>.
 
-use serde::{Deserialize, Deserializer, Serializer};
-use tendril::StrTendril;
+mod dropless;
 
-/// Serialization for the StrTendril type.
-pub fn serialize<S: Serializer>(tendril: &StrTendril, serializer: S) -> Result<S::Ok, S::Error> {
-    serializer.serialize_str(&tendril[..])
-}
+pub mod symbol;
 
-/// Deserialization for the StrTendril type.
-pub fn deserialize<'de, D: Deserializer<'de>>(deserializer: D) -> Result<StrTendril, D::Error> {
-    Ok(String::deserialize(deserializer)?.into())
-}
+pub mod span;
+pub use span::Span;
+
+pub mod span_json;
+
+pub mod tendril_json;
